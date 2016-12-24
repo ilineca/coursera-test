@@ -18,10 +18,9 @@
              <input id="lunch-menu" type="text" ng-model="lunchList"
              placeholder="list comma separated dishes you usually have for lunch"
              class="form-control">
+             <p class="form-group"> {{message}}</p>
          </div>
-         <div class="alert alert-{{alertType}}">
-            {{message}}
-          </div>
+
          <div class="form-group">
              <button class="btn btn-default" ng-click="checkIftooMuch()">Check If Too Much</button>
          </div>

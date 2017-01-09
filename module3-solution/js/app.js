@@ -33,13 +33,17 @@ function NarrowItDownController(MenuSearchService){
   var menu = this;
 
   menu.getMatchedMenuItems = function(searchTerm){
-    var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
-    promise.then(function(result){
-      console.log("result.data: ", result.data);
-       menu.found = result.data.menu_items;
-       console.log("menu.found: ", menu.found);
-    });
-
+    console.log("searchTerm: ", searchTerm);
+    if(searchTerm === undefined || searchTerm === ''){
+      menu.found = [];
+      menu.nothingFound = true;
+    }else{
+      var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
+      promise.then(function(result){
+         menu.found = result.data.menu_items;
+         menu.nothingFound = (result.data.menu_items === undefined || result.data.menu_items.length === 0)
+      });
+    }
   }
 
   menu.removeItem = function(itemIndex){

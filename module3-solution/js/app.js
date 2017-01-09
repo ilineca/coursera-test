@@ -3,22 +3,49 @@
 
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
-.service('MenuSearchService', MenuSearchService);
+.service('MenuSearchService', MenuSearchService)
+.directive('foundItems', FoundItemsDirective);
+
+function FoundItemsDirective() {
+  var ddo = {
+    templateUrl: 'directives/foundItems.html',
+    restrict: 'E',
+    scope: {
+      found: '<',
+      onRemove: '&',
+    },
+    controller: FoundItemsDirectiveController,
+    controllerAs: 'list',
+    bindToController: true
+  };
+
+  return ddo;
+}
+
+
+function FoundItemsDirectiveController() {
+  var list = this;
+}
 
 
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService){
   var menu = this;
-  menu.getMatchedMenuItems = function(searchTerm){
-    console.log(searchTerm);
-    var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
 
-    //TEST
+  menu.getMatchedMenuItems = function(searchTerm){
+    var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
     promise.then(function(result){
-      console.log("resultOfPRmise: ", result);
+      console.log("result.data: ", result.data);
+       menu.found = result.data.menu_items;
+       console.log("menu.found: ", menu.found);
     });
+
   }
-  // this.found
+
+  menu.removeItem = function(itemIndex){
+    console.log("itemIndex: ", itemIndex);
+    menu.found.splice(itemIndex, 1);
+  }
 
 }
 
@@ -33,86 +60,24 @@ function MenuSearchService($http){
     }).then(function (result) {
         // process result and only keep items that match
         var allItems = result.data.menu_items;
-        var foundItems = [];
+        var found = [];
 
         for(var i = 0; i < allItems.length; i++){
           if(allItems[i].description.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1){
-            foundItems.push(allItems[i]);
+            found.push(allItems[i]);
           }
         }
-        return foundItems;
+        result.data.menu_items = found;
+        return result;
     }).catch(function(error){
       console.log(error);
     });
+    console.log("promise: ", promise);
     return promise;
   }
 
-
-
-}
-//getMatchedMenuItems(searchTerm)
-
-
-/*
-angular.module('NarrowItDownApp', [])
-.controller('NarrowItDownController', NarrowItDownController)
-.service('MenuCategoriesService', MenuCategoriesService)
-.constant('ApiBasePath', "http://davids-restaurant.herokuapp.com");
-
-
-MenuCategoriesController.$inject = ['MenuCategoriesService'];
-function MenuCategoriesController(MenuCategoriesService) {
-  var menu = this;
-
-  var promise = MenuCategoriesService.getMenuCategories();
-
-  promise.then(function (response) {
-    menu.categories = response.data;
-  })
-  .catch(function (error) {
-    console.log("Something went terribly wrong.");
-  });
-
-  menu.logMenuItems = function (shortName) {
-    var promise = MenuCategoriesService.getMenuForCategory(shortName);
-
-    promise.then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-  };
-
 }
 
 
-MenuCategoriesService.$inject = ['$http', 'ApiBasePath'];
-function MenuCategoriesService($http, ApiBasePath) {
-  var service = this;
 
-  service.getMenuCategories = function () {
-    var response = $http({
-      method: "GET",
-      url: (ApiBasePath + "/categories.json")
-    });
-
-    return response;
-  };
-
-
-  service.getMenuForCategory = function (shortName) {
-    var response = $http({
-      method: "GET",
-      url: (ApiBasePath + "/menu_items.json"),
-      params: {
-        category: shortName
-      }
-    });
-
-    return response;
-  };
-
-}
-*/
 })();

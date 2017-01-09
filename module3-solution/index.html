@@ -3,7 +3,7 @@
   <head>
     <title>Narrow Down Your Menu Choice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular.js"></script>
     <script src="js/app.js"></script>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
@@ -20,8 +20,12 @@
     </div>
 
     <!-- found-items should be implemented as a component -->
-    <found-items found-items="...." on-remove="...."></found-items>
+    <br><br><br><br>
+    <div class="form-group">
+      <found-items found="menu.found" on-remove="menu.removeItem(index)"></found-items>
+    </div>
   </div>
+</p>
 
 </body>
 </html>

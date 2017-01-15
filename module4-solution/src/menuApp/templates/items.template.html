@@ -5,7 +5,7 @@
   <th>Item details</th>
   <tr>
     <td><ul>
-      <li ng-repeat="item in itemList.items" ui-sref="itemsList.itemDetail({itemId:$index})">
+      <li ng-repeat="item in itemList.items" ui-sref="items.itemDetail({itemId:$index})">
         {{item.short_name }}, {{item.name}}
       </li>
     </ul></td>

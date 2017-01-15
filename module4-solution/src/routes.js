@@ -28,8 +28,8 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     }
   })
 
-  .state('itemsList', {
-    url: '/items-list/{categoryShortName}',
+  .state('items', {
+    url: '/items/{categoryShortName}',
     templateUrl: 'src/menuApp/templates/items.template.html',
     controller: 'ItemListController as itemList',
     resolve: {
@@ -39,7 +39,7 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     }
   })
 
-  .state('itemsList.itemDetail', {
+  .state('items.itemDetail', {
     url: '/item-detail/{itemId}',
     templateUrl: 'src/menuApp/templates/item-detail.template.html',
     controller: 'ItemDetailController as itemDetail'

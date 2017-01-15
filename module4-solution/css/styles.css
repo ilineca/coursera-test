@@ -35,6 +35,13 @@ a[ui-sref]:hover {
   padding-right: 5px;
 }
 
-td {
+
+table, td, th {
+    border: 1px solid #ddd;
+    text-align: left;
     vertical-align: top;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
 }

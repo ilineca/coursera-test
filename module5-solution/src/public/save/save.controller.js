@@ -4,10 +4,10 @@
 angular.module('public')
 .controller('SaveController', SaveController);
 
-SaveController.$inject = ['menuItemNumber'];
-function SaveController(menuItemNumber) {
+SaveController.$inject = ['menuItem'];
+function SaveController(menuItem) {
   var $ctrl = this;
-  $ctrl.menuItemNumber = menuItemNumber;
+  $ctrl.menuItem = menuItem;
 }
 
 

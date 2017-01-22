@@ -29,8 +29,12 @@ function MenuService($http, ApiPath, $filter) {
 
   service.getMenuItem = function (menuItemNumber) {
     return $http.get(ApiPath + '/menu_items/' + $filter('uppercase')(menuItemNumber) + '.json').then(function(response) {
-    // return $http.get(ApiPath + '/menu_items/' + menuItemNumber + '.json').then(function (response) {
+      service.favoriteItem = response.data;
+      console.log("service.favoriteItem:", service.favoriteItem);
       return response.data;
+    }, function error(response){
+      console.log("Error response: ", response);
+      throw new Error('No such menu number exists');
     });
   };
 

@@ -50,6 +50,7 @@
     <input type="text" name="favoriteDish" placeholder="favorite dish menu #"
       ng-model="reg.user.favoriteDish"
       required>
+      <{{}}
 
     <button
       ng-disabled="regForm.$invalid" ui-sref="public.save({menuItemNumber: reg.user.favoriteDish})">Submit</button>

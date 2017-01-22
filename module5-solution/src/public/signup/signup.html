@@ -3,7 +3,7 @@
   <form name='regForm' novalidate>
     <!-- first name -->
     <input type="text" name="firstname" placeholder="first name"
-      ng-model="reg.user.firstname"
+      ng-model="regCtrl.user.firstname"
       required
       minlength="2"
       ng-maxlength="50">
@@ -17,7 +17,7 @@
 
     <!-- last name -->
     <input type="text" name="lastname" placeholder="last name"
-      ng-model="reg.user.lastname"
+      ng-model="regCtrl.user.lastname"
       required
       minlength="2"
       ng-maxlength="50">
@@ -33,7 +33,7 @@
       <br>
 
     <input type="email" name="email" placeholder="Email"
-      ng-model="reg.user.email"
+      ng-model="regCtrl.user.email"
       required>
       <span ng-if="regForm.email.$invalid && regForm.email.$touched">
         Must be a valid email address: handle@domain format
@@ -41,22 +41,26 @@
       <br>
 
     <input type="text" name="phone" placeholder="Phone ###-###-####"
-      ng-model="reg.user.phone"
+      ng-model="regCtrl.user.phone"
       pattern="(\d{3})-(\d{3})-(\d{4})">
       <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
         Phone must be in the format ###-###-####.
       </span>
       <br>
     <input type="text" name="favoriteDish" placeholder="favorite dish menu #"
-      ng-model="reg.user.favoriteDish"
+      ng-model="regCtrl.user.favoriteDish"
       required>
-      <{{}}
+
 
     <button
-      ng-disabled="regForm.$invalid" ui-sref="public.save({menuItemNumber: reg.user.favoriteDish})">Submit</button>
+      ng-disabled="regForm.$invalid" ng-click="regCtrl.saveUserData();">Submit</button>
+      <!-- <button ng-click="regCtrl.saveUserData();">SubmitUnverified</button> -->
 
       <div style="margin-top: 10px;">
-        Form valid? {{ regForm.$valid }}
+        {{ regCtrl.message }}
       </div>
+      <!-- <div style="margin-top: 10px;">
+        Form valid? {{ regForm.$valid }}
+      </div> -->
   </form>
 </fieldset>

@@ -6,8 +6,15 @@ angular.module('public')
 
 SaveController.$inject = ['menuItem'];
 function SaveController(menuItem) {
-  var $ctrl = this;
-  $ctrl.menuItem = menuItem;
+  var saveCtrl = this;
+  console.log(menuItem);
+  //saveCtrl.menuItem = menuItem;
+// menuItem.then(function(response){
+//   saveCtrl.menuItem = response.data;
+// }).catch(function(error){
+//   console.log("Egati errorraa!!! ", error);
+// });
+
 }
 
 

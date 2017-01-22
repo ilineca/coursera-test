@@ -43,18 +43,34 @@ function routeConfig ($stateProvider) {
     })
     .state('public.signup', {
       url: '/signup/{menuItemNumber}',
-      templateUrl: 'src/public/signup/signup.html'
+      templateUrl: 'src/public/signup/signup.html',
+      controller: 'SignupController',
+      controllerAs: 'regCtrl'
     })
-    .state('public.save', {
-      url: '/save/{menuItemNumber}',
-      templateUrl: 'src/public/save/save.html',
-      controller: 'SaveController',
-      controllerAs: 'saveCtrl',
+    .state('public.myinfo', {
+      url: '/myinfo',
+      templateUrl: 'src/public/myinfo/myinfo.html',
+      controller: 'MyInfoController',
+      controllerAs: 'miCtrl',
       resolve: {
-        menuItem: ['$stateParams','MenuService', function ($stateParams, MenuService) {
-          return MenuService.getMenuItem($stateParams.menuItemNumber);
+        userData: ['UserDataService', function (UserDataService) {
+          return UserDataService.getUserData();
         }]
       }
     });
+    // .state('public.save', {
+    //   url: '/save/{menuItemNumber}',
+    //   templateUrl: 'src/public/save/save.html',
+    //   controller: 'SaveController',
+    //   controllerAs: 'saveCtrl',
+    //   resolve: {
+    //     menuItem: ['$stateParams','MenuService', function ($stateParams, MenuService) {
+    //       return MenuService.getMenuItem($stateParams.menuItemNumber);
+    //     }]
+    //   }
+    // })
+
+
+
 }
 })();

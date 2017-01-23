@@ -9,6 +9,7 @@ function MyInfoController(userData) {
   var miCtrl = this;
   miCtrl.message = '';
   miCtrl.userData = userData;
+  
 }
 
 })();

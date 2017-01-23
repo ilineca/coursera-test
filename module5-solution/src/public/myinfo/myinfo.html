@@ -2,4 +2,16 @@
   Not Signed Up Yet. <a ui-sref="public.signup"> Sign up now!</a>
 </div>
 
-{{ miCtrl.userData }}
+<!-- {"firstname":"fdfdf","lastname":"fdfd","email":"ffdfd@dsds","favoriteDish":"A1"} -->
+
+<div class="container" ng-if="miCtrl.userData !== undefined">
+<table>
+  <tr><td>First Name: </td><td>{{miCtrl.userData.firstname}}</td></tr>
+  <tr><td>Last Name: </td><td>{{miCtrl.userData.lastname}}</td></tr>
+  <tr><td>Email: </td><td>{{miCtrl.userData.email}}</td></tr>
+  <tr><td>Favorite Dish: </td><td>{{miCtrl.userData.favoriteDish}}</td></tr>
+</table>
+
+<menu-item menu-item="miCtrl.userData.menuItem"></menu-item>
+
+</div>

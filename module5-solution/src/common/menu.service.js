@@ -29,6 +29,7 @@ function MenuService($http, ApiPath, $filter) {
 
   service.getMenuItem = function (menuItemNumber) {
     return $http.get(ApiPath + '/menu_items/' + $filter('uppercase')(menuItemNumber) + '.json').then(function(response) {
+      //console.log("response data form service: ", response.data);
       return response.data;
     });
   };
